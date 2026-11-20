@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowSync Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            dark: '#1e1135',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="p-2 sm:p-4 lg:p-6 min-h-screen flex items-center justify-center">
+
+    <!-- Main Outer Container -->
+    <div id="mainApp" class="w-full max-w-[1440px] bg-[#eceef2] rounded-3xl p-3 sm:p-5 lg:p-7 shadow-2xl flex flex-col lg:flex-row gap-6 relative overflow-hidden">
+        
+        <!-- SIDEBAR -->
+        <aside class="w-full lg:w-64 bg-white/80 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shrink-0 shadow-sm border border-white/50">
+            <div>
+                <!-- Logo -->
+                <div class="flex items-center gap-3 px-2 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center shadow-md shadow-brand-500/20">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-gray-900">GROWSYNC<span class="text-xs align-top text-brand-600">™</span></span>
+                </div>
+
+                <!-- MENU Section -->
+                <div class="mb-8">
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-3 mb-3">Menu</p>
+                    <nav class="space-y-1" id="sidebarMenu">
+                        <a href="#" data-page="dashboard" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-brand-100 text-brand-700 font-semibold transition-all">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                                <span class="text-sm">Dashboard</span>
+                            </div>
+                        </a>
+                        <a href="#" data-page="task" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="check-square" class="w-5 h-5"></i>
+                                <span class="text-sm">Task</span>
+                            </div>
+                            <span class="bg-brand-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm">15</span>
+                        </a>
+                        <a href="#" data-page="projects" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all"><div class="flex items-center gap-3"><i data-lucide="briefcase-business" class="w-5 h-5"></i><span class="text-sm">Projects</span></div></a>
+                        <a href="#" data-page="calendar" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="calendar" class="w-5 h-5"></i>
+                                <span class="text-sm">Calendar</span>
+                            </div>
+                        </a>
+                        <a href="#" data-page="analytics" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                                <span class="text-sm">Analytics</span>
+                            </div>
+                        </a>
+                        <a href="#" data-page="team" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                                <span class="text-sm">Team</span>
+                            </div>
+                        </a>
+                        <a href="#" data-page="notifications" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all"><div class="flex items-center gap-3"><i data-lucide="bell" class="w-5 h-5"></i><span class="text-sm">Notifications</span></div></a>
+                        <a href="#" data-page="activity" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all"><div class="flex items-center gap-3"><i data-lucide="history" class="w-5 h-5"></i><span class="text-sm">Activity</span></div></a>
+                        <a href="#" data-page="notifications" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all"><div class="flex items-center gap-3"><i data-lucide="bell" class="w-5 h-5"></i><span class="text-sm">Notifications</span></div></a>
+                        <a href="#" data-page="activity" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all"><div class="flex items-center gap-3"><i data-lucide="history" class="w-5 h-5"></i><span class="text-sm">Activity</span></div></a>
+                    </nav>
+                </div>
+
+                <!-- GENERAL Section -->
+                <div>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider px-3 mb-3">General</p>
+                    <nav class="space-y-1">
+                        <a href="#" data-page="settings" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <i data-lucide="settings" class="w-5 h-5"></i>
+                            <span class="text-sm">Settings</span>
+                        </a>
+                        <a href="#" data-page="help" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-900 font-medium transition-all">
+                            <i data-lucide="help-circle" class="w-5 h-5"></i>
+                            <span class="text-sm">Help</span>
+                        </a>
+                        <a href="#" id="logoutButton" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-gray-500 hover:bg-red-50 hover:text-red-600 font-medium transition-all">
+                            <i data-lucide="log-out" class="w-5 h-5"></i>
+                            <span class="text-sm">Logout</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Download Mobile App Card -->
+            <div class="app-promo-card rounded-2xl p-4 text-white mt-8 relative overflow-hidden shadow-lg border border-purple-400/20">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-400/20 rounded-full blur-xl pointer-events-none"></div>
+                <h4 class="font-bold text-sm leading-snug mb-1">Download Our<br>Mobile App</h4>
+                <p class="text-[11px] text-purple-200/80 mb-4">Get easy in another way</p>
+                <button onclick="showToast('App download link sent to your device!')" class="w-full bg-gradient-to-r from-brand-400 to-brand-600 hover:from-brand-500 hover:to-brand-700 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-md transition-all active:scale-95">
+                    Download
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col gap-6 overflow-hidden">
+            <div id="dashboardContent" class="flex flex-col gap-6">
+            
+            <!-- TOP HEADER BAR -->
+            <header class="bg-white/80 backdrop-blur-md rounded-2xl px-5 py-3.5 flex flex-wrap items-center justify-between gap-4 shadow-sm border border-white/50">
+                <!-- Search Box -->
+                <div class="relative flex-1 min-w-[220px] max-w-md">
+                    <i data-lucide="search" class="w-4 h-4 text-brand-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="searchInput" placeholder="Search Task" class="w-full bg-brand-50/50 hover:bg-brand-50 focus:bg-white text-sm text-gray-800 placeholder-gray-400 rounded-full pl-10 pr-12 py-2 border border-brand-100 focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-200 transition-all">
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-brand-500 bg-brand-100/80 px-2 py-0.5 rounded-full border border-brand-200">⌘ F</span>
+                </div>
+
+                <!-- Header Actions & Profile -->
+                <div class="flex items-center gap-4">
+                    <!-- Notification & Message Icons -->
+                    <button onclick="showToast('You have 3 unread messages')" class="w-10 h-10 rounded-full bg-brand-50/80 hover:bg-brand-100 flex items-center justify-center text-brand-600 transition-all relative">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="window.growSyncNavigate('notifications')" aria-label="Open notifications" class="w-10 h-10 rounded-full bg-brand-50/80 hover:bg-brand-100 flex items-center justify-center text-brand-600 transition-all relative">
+                        <i data-lucide="bell" class="w-4 h-4"></i>
+                        <span class="w-2 h-2 bg-red-500 rounded-full absolute top-2.5 right-2.5 ring-2 ring-white"></span>
+                    </button>
+
+                    <!-- User Profile -->
+                    <div class="flex items-center gap-3 pl-2 border-l border-gray-200">
+                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-700 to-brand-400 text-white flex items-center justify-center text-sm font-bold ring-2 ring-brand-300">A</div>
+                        <div class="hidden sm:block text-left">
+                            <h5 class="text-xs font-bold text-gray-900 leading-tight">Aman</h5>
+                            <p class="text-[11px] text-gray-400 font-medium">aman@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- DASHBOARD TITLE & ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Dashboard</h1>
+                    <p class="text-sm text-gray-500 font-normal mt-0.5">Plan, prioritize, and accomplish your tasks with ease.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="openModal('addProjectModal')" class="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-brand-500/20 transition-all active:scale-95">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add Project</span>
+                    </button>
+                    <button onclick="triggerImport()" class="bg-white hover:bg-gray-50 text-brand-700 border border-brand-300 px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-all active:scale-95">
+                        Import Data
+                    </button>
+                    <input type="file" id="importFile" class="hidden" onchange="handleFileImport(event)">
+                </div>
+            </div>
+
+            <!-- STAT CARDS GRID (4 Cards) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1: Total -->
+                <div class="card-gradient-1 rounded-2xl p-5 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group hover:scale-[1.02] transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-purple-200">Total</span>
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-white group-hover:text-brand-800 transition-all">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold tracking-tight" id="statTotal">68</div>
+                </div>
+
+                <!-- Card 2: Ended -->
+                <div class="card-gradient-2 rounded-2xl p-5 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group hover:scale-[1.02] transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-purple-100">Ended</span>
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-white group-hover:text-brand-600 transition-all">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold tracking-tight" id="statEnded">47</div>
+                </div>
+
+                <!-- Card 3: Running -->
+                <div class="card-gradient-3 rounded-2xl p-5 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group hover:scale-[1.02] transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-purple-100">Running</span>
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-white group-hover:text-brand-600 transition-all">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold tracking-tight" id="statRunning">13</div>
+                </div>
+
+                <!-- Card 4: Pending -->
+                <div class="card-gradient-4 rounded-2xl p-5 text-white flex flex-col justify-between shadow-lg relative overflow-hidden group hover:scale-[1.02] transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-purple-100">Pending</span>
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-white group-hover:text-brand-600 transition-all">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold tracking-tight" id="statPending">2</div>
+                        <span class="text-[10px] text-purple-100/90 font-medium mt-1 inline-block">On Discuss</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE SECTION (Analytics & Upcoming Meetings) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Project Analytics (2 Columns) -->
+                <div class="lg:col-span-2 bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Project Analytics</h3>
+                            <div class="flex items-baseline gap-1.5 mt-1">
+                                <span class="text-2xl font-bold text-brand-700" id="analyticsCompletedText">47</span>
+                                <span class="text-sm font-semibold text-gray-400">/ 68 Completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart SVG -->
+                    <div class="relative w-full h-44 mt-2">
+                        <svg class="w-full h-full overflow-visible" viewBox="0 0 500 150" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+                                    <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.0"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Area Path -->
+                            <path d="M 0,110 Q 75,120 150,110 T 300,60 T 420,20 T 500,80 L 500,150 L 0,150 Z" fill="url(#chartGradient)" />
+                            
+                            <!-- Curved Line Path -->
+                            <path d="M 0,110 Q 75,120 150,110 T 300,60 T 420,20 T 500,80" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+
+                            <!-- Marker Point with Badge (75%) -->
+                            <g transform="translate(260, 65)">
+                                <circle cx="0" cy="0" r="4" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+                                <line x1="0" y1="-4" x2="0" y2="-28" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                <!-- Badge Callout -->
+                                <g transform="translate(-18, -48)">
+                                    <rect x="0" y="0" width="36" height="20" rx="6" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5" class="shadow-sm"/>
+                                    <text x="18" y="13" font-size="10" font-weight="bold" fill="#6d28d9" text-anchor="middle">75%</text>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <!-- Days Labels (S M T W T F S) -->
+                        <div class="flex justify-between text-xs font-bold text-gray-500 pt-3 px-2">
+                            <span>S</span>
+                            <span>M</span>
+                            <span>T</span>
+                            <span>W</span>
+                            <span>T</span>
+                            <span>F</span>
+                            <span>S</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Meetings Card (1 Column) -->
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
+                                <i data-lucide="video" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-900 leading-tight">Upcoming</h3>
+                                <h4 class="text-xs font-semibold text-gray-500">Meetings</h4>
+                            </div>
+                            <div class="ml-auto text-right">
+                                <p class="text-[10px] text-gray-400 font-semibold">Time:</p>
+                                <p class="text-[11px] font-bold text-brand-700" id="meetingTime">02.00 pm - 04.00 pm</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-50/60 rounded-xl p-4 mb-4 border border-brand-100/50">
+                            <h4 class="font-bold text-gray-900 text-sm" id="meetingTitle">Meeting with HTX Company</h4>
+                            <p class="text-xs text-gray-500 mt-1 flex items-center gap-1.5">
+                                <i data-lucide="users" class="w-3.5 h-3.5 text-brand-500"></i>
+                                4 Attendees scheduled
+                            </p>
+                        </div>
+                    </div>
+
+                    <button id="startMeetingBtn" onclick="toggleMeetingState()" class="w-full bg-gradient-to-r from-brand-700 to-brand-500 hover:from-brand-800 hover:to-brand-600 text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-md shadow-brand-500/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                        <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                        <span id="meetingBtnText">Start Meeting</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BOTTOM SECTION (Team Collaboration & Time Tracker) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Team Collaboration (2 Columns) -->
+                <div class="lg:col-span-2 bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-5">
+                        <h3 class="text-lg font-bold text-gray-900">Team Collaboration</h3>
+                        <button onclick="openModal('addMemberModal')" class="flex items-center gap-1.5 border border-brand-400 text-brand-700 hover:bg-brand-50 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                            <span>Add Member</span>
+                        </button>
+                    </div>
+
+                    <!-- Members List Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="teamMembersContainer">
+                        <!-- Member 1: Johnson -->
+                        <div class="bg-purple-50/50 rounded-2xl p-4 border border-purple-100 flex flex-col justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Johnson" class="w-11 h-11 rounded-full object-cover ring-2 ring-purple-200">
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-bold text-gray-900 text-sm truncate">Johnson</h4>
+                                    <p class="text-[11px] text-gray-500 truncate">Working on <span class="font-semibold text-gray-700">Responsive Layout</span></p>
+                                </div>
+                                <span class="bg-brand-400 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0">Completed</span>
+                            </div>
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-purple-200 h-1.5 rounded-full mt-4 overflow-hidden">
+                                <div class="bg-brand-600 h-full rounded-full w-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Member 2: Alex -->
+                        <div class="bg-purple-50/50 rounded-2xl p-4 border border-purple-100 flex flex-col justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Alex" class="w-11 h-11 rounded-full object-cover ring-2 ring-purple-200">
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-bold text-gray-900 text-sm truncate">Alex</h4>
+                                    <p class="text-[11px] text-gray-500 truncate">Working on <span class="font-semibold text-gray-700">Github Repository</span></p>
+                                </div>
+                                <span class="bg-purple-200 text-brand-800 text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0">In Progress</span>
+                            </div>
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-purple-200 h-1.5 rounded-full mt-4 overflow-hidden">
+                                <div class="bg-brand-500 h-full rounded-full w-[65%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Tracker Card (1 Column) -->
+                <div class="card-dark-purple rounded-2xl p-6 text-white flex flex-col justify-between shadow-xl relative overflow-hidden min-h-[220px]">
+                    <!-- Subtle background light wave graphics -->
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="flex items-center justify-between z-10">
+                        <span class="text-sm font-semibold tracking-wide text-purple-200">Time Tracker</span>
+                        <span id="trackerStatus" class="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Running
+                        </span>
+                    </div>
+
+                    <!-- Digital Timer Display -->
+                    <div class="text-center my-3 z-10">
+                        <div class="text-4xl sm:text-5xl font-extrabold tracking-wider font-mono text-white drop-shadow-md" id="timerDisplay">
+                            02:34:40
+                        </div>
+                    </div>
+
+                    <!-- Action Controls -->
+                    <div class="flex items-center justify-center gap-4 z-10">
+                        <!-- Play/Pause Toggle -->
+                        <button id="playPauseBtn" onclick="toggleTimer()" class="w-12 h-12 rounded-full bg-white text-brand-900 hover:bg-purple-100 flex items-center justify-center shadow-lg transition-all active:scale-90">
+                            <i data-lucide="pause" id="playPauseIcon" class="w-5 h-5 fill-current"></i>
+                        </button>
+                        <!-- Stop/Reset -->
+                        <button onclick="resetTimer()" class="w-10 h-10 rounded-full bg-red-500/80 hover:bg-red-500 text-white flex items-center justify-center shadow-lg transition-all active:scale-90">
+                            <i data-lucide="square" class="w-4 h-4 fill-current"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /dashboardContent -->
+            <section id="featureView" class="hidden bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 min-h-[520px]"></section>
+
+        </main>
+    </div>
+
+    <!-- MODAL: ADD PROJECT -->
+    <div id="addProjectModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-95 transition-transform duration-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-900">Add New Project</h3>
+                <button onclick="closeModal('addProjectModal')" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="handleAddProject(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Project Name</label>
+                    <input type="text" id="projectName" required placeholder="e.g., E-Commerce Mobile App" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Status</label>
+                    <select id="projectStatus" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500">
+                        <option value="running">Running</option>
+                        <option value="pending">Pending</option>
+                        <option value="ended">Ended</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeModal('addProjectModal')" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-100">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md">Create Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD MEMBER -->
+    <div id="addMemberModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-95 transition-transform duration-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-900">Add Team Member</h3>
+                <button onclick="closeModal('addMemberModal')" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="handleAddMember(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Member Name</label>
+                    <input type="text" id="memberName" required placeholder="e.g., Sarah Jenkins" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Current Task</label>
+                    <input type="text" id="memberTask" required placeholder="e.g., API Integration" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Status</label>
+                    <select id="memberStatus" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500">
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeModal('addMemberModal')" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-100">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md">Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="addTaskModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-200">
+      <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-95 transition-transform duration-200 mx-4">
+        <div class="flex justify-between items-center mb-4"><h3 class="text-lg font-bold text-gray-900">Create Task</h3><button onclick="closeModal('addTaskModal')" class="text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+        <form id="taskForm" class="space-y-4">
+          <div><label class="block text-xs font-semibold text-gray-700 mb-1">Task title</label><input id="taskTitle" required maxlength="100" placeholder="e.g. Prepare project presentation" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-brand-500"></div>
+          <div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-semibold text-gray-700 mb-1">Due date</label><input id="taskDue" type="date" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm"></div><div><label class="block text-xs font-semibold text-gray-700 mb-1">Priority</label><select id="taskPriority" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm"><option>Medium</option><option>High</option><option>Urgent</option><option>Low</option></select></div></div>
+          <div><label class="block text-xs font-semibold text-gray-700 mb-1">Project</label><input id="taskProject" placeholder="General" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-sm"></div>
+          <div class="flex justify-end gap-3 pt-2"><button type="button" onclick="closeModal('addTaskModal')" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-100">Cancel</button><button type="submit" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md">Save Task</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Logged-out screen: shown after Logout; this front-end demo uses a local session flag. -->
+    <section id="loggedOutScreen" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[#eceef2] p-5">
+      <div class="w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl border border-white">
+        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 text-white shadow-lg"><i data-lucide="log-out" class="h-7 w-7"></i></div>
+        <p class="text-xs font-bold tracking-[.2em] text-brand-600">GROWSYNC</p>
+        <h1 class="mt-2 text-2xl font-bold text-gray-900">You are logged out</h1>
+        <p class="mt-2 text-sm text-gray-500">Your workspace is safely saved on this browser. Sign in again to continue.</p>
+        <button id="loginAgainButton" class="mt-7 w-full rounded-xl bg-gradient-to-r from-brand-700 to-brand-500 px-5 py-3 text-sm font-semibold text-white shadow-lg">Continue as Aman</button>
+        <p class="mt-4 text-[11px] text-gray-400">Demo sign-in screen · connect Firebase Authentication for real accounts.</p>
+      </div>
+    </section>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    
+\n
+
+    <script src="app.js" defer></script>
+</body>
+</html>

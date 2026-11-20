@@ -1,0 +1,73 @@
+body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e4e9;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Gradient effects matching design */
+        .card-dark-purple {
+            background: linear-gradient(145deg, #1f0b38 0%, #3b156a 100%);
+        }
+        .card-gradient-1 {
+            background: linear-gradient(135deg, #2a0845 0%, #642b73 100%);
+        }
+        .card-gradient-2 {
+            background: linear-gradient(135deg, #a862ea 0%, #7d33cf 100%);
+        }
+        .card-gradient-3 {
+            background: linear-gradient(135deg, #b97cf3 0%, #8c41e4 100%);
+        }
+        .card-gradient-4 {
+            background: linear-gradient(135deg, #ce93f9 0%, #a252f5 100%);
+        }
+        .app-promo-card {
+            background: linear-gradient(145deg, #2e094d 0%, #5c1897 100%);
+        }
+        body.dark-mode { background:#17101f; }
+        body.dark-mode .bg-white\/80, body.dark-mode .bg-white { background-color:#2b1b3b !important; color:#f7efff !important; }
+        body.dark-mode .text-gray-900, body.dark-mode .text-gray-800 { color:#f7efff !important; }
+        body.dark-mode .text-gray-500, body.dark-mode .text-gray-400 { color:#c8b8d7 !important; }
+        body.dark-mode .border-white\/50, body.dark-mode .border-gray-100 { border-color:#513765 !important; }
+
+/* Additional polish: preserve the supplied GrowSync layout and visual language. */
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
+button:hover { filter: brightness(1.035); }
+button:active { transform: translateY(1px) scale(.99); }
+:focus-visible { outline: 3px solid #c084fc !important; outline-offset: 3px; }
+.nav-item { position: relative; }
+.nav-item::before { content: ''; position: absolute; left: 0; top: 22%; bottom: 22%; width: 3px; border-radius: 0 5px 5px 0; background: transparent; transition: background .2s ease; }
+.nav-item:hover::before, .nav-item[aria-current="page"]::before { background: #8b5cf6; }
+.card-dark-purple, .card-gradient-1, .card-gradient-2, .card-gradient-3, .card-gradient-4, .app-promo-card { background-size: 140% 140%; transition: background-position .45s ease, transform .22s ease, box-shadow .22s ease; }
+.card-dark-purple:hover, .card-gradient-1:hover, .card-gradient-2:hover, .card-gradient-3:hover, .card-gradient-4:hover { background-position: 100% 0; transform: translateY(-2px); }
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c4b5fd transparent; }
+#toastContainer > * { animation: toast-in .24s ease both; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@media (max-width: 640px) { body { padding: 0 !important; } .custom-scrollbar { max-width: 100%; } }
+
+/* GrowSync 2.0 additions — keep the supplied dashboard composition intact. */
+#featureView { animation: growsync-fade .22s ease both; }
+@keyframes growsync-fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+#loggedOutScreen { background: radial-gradient(circle at 50% 15%, #f5f0ff 0, #eceef2 55%); }
+#loggedOutScreen button:hover { box-shadow: 0 10px 25px rgba(109,40,217,.22); transform: translateY(-1px); }
+#featureView article { transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+#featureView article:hover { border-color: #c4b5fd; box-shadow: 0 8px 22px rgba(76,29,149,.06); }
+#featureView input, #featureView select, #featureView textarea { max-width: 100%; }
+#taskAttachment { font-size: 12px; }
+@media (max-width: 640px) { #featureView { padding: 1rem !important; } #featureView .min-h-24 { min-height: 5.5rem; } }
